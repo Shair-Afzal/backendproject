@@ -1,9 +1,9 @@
-import { v2 } from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 import fs from "fs"
 cloudinary.config({ 
         cloud_name: process.env.CLOUDINARY_CLUDE_NAME, 
         api_key: process.env.CLUDINARY_API_KEY, 
-        api_secret: CLUDINARY_API_SECRET
+        api_secret: process.env.CLUDINARY_API_SECRET
     });
  
 const UploadonCloudinary=async (localfilepath)=>{
@@ -13,6 +13,7 @@ const UploadonCloudinary=async (localfilepath)=>{
        .upload(localfilepath,{
           resource_type:"auto"
        })
+       fs.unlinkSync(localfilepath)
        return uploadfile
 
     }catch(err){
